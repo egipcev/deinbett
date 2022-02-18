@@ -1,0 +1,8 @@
+{
+    "env": {
+        "firstName": "Firstname",
+        "lastName": "Lastname",
+        "password": "Password_12345!#",
+        "salutation": "Herr"
+    }
+}
