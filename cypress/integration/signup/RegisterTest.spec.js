@@ -4,7 +4,7 @@ import { navigateTo } from "../../support/page_objects/mainPage";
 /// <reference types = "cypress" />
 
 
-describe('', () => {
+describe('Register account test suite', () => {
     const ACCEPT_COOKIES_TEXT = 'Alle auswählen & bestätigen'
     let randomEmail;
 
@@ -16,12 +16,12 @@ describe('', () => {
 
 
 
-    it('Register account', () => {
+    it('Register account positive scenario', () => {
         let user = {
-            "firstName": "Firstname",
-            "lastName": "Lastname",
-            "password": "Password_12345!#",
-            "salutation": "Herr",
+            "firstName": Cypress.env('firstName'),
+            "lastName": Cypress.env('lastName'),
+            "password": Cypress.env('password'),
+            "salutation": Cypress.env('salutation'),
             "email": randomEmail
         }
         navigateTo.loginPage()
