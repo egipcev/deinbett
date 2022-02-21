@@ -22,15 +22,7 @@ export class RegisterPage {
         
     }
 
-    checkSignup() {
-        
-        cy.location('pathname').should('eq', '/')
-        cy.get(".headerElement--login")
-            .find('a')
-            .should("have.attr", "href", "/kundenkonto");
-    }
-
-    checkAPIResponse() {
+    checkAPIResponseisOK() {
         cy.wait('@postRegister')
         cy.get('@postRegister').then(xhr => {
             expect(xhr.response.statusCode).to.equal(200)

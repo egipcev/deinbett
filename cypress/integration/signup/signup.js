@@ -1,40 +1,52 @@
 import { onLoginPage } from "../../support/page_objects/loginPage";
 import { onRegisterPage } from "../../support/page_objects/registerPage";
-import { navigateTo } from "../../support/page_objects/mainPage";
+import { onMainPage } from "../../support/page_objects/mainPage";
 import { When, Then, Given } from 'cypress-cucumber-preprocessor/steps';
 /// <reference types = "cypress" />
 
-function randomEmail() {
+var user;
+
+function getRandomEmail() {
     return 'test-' + Math.random().toString(36).substring(2, 16) + '@mail.com'
 }
 
-const ACCEPT_COOKIES_TEXT = 'Alle auswählen & bestätigen'
+
 
 Given('user opens main page', () => {
-    
-    cy.visit('/')
-    cy.contains(ACCEPT_COOKIES_TEXT).click()
+    onMainPage.open()
+   
+})
+
+When('user logs in', () => {
+
+    onMainPage.goToLoginPage()
+    onLoginPage.login(user)
+
 })
 
 
 When('user signs up', () => {
 
-    let user = {
+    user = {
         "firstName": Cypress.env('firstName'),
         "lastName": Cypress.env('lastName'),
         "password": Cypress.env('password'),
         "salutation": Cypress.env('salutation'),
-        "email": randomEmail()
+        "email": getRandomEmail()
     }
-    navigateTo.loginPage()
+    onMainPage.goToLoginPage()
     onLoginPage.goToRegistration()
     onRegisterPage.signup(user)
 })
 
 Then('user is logged in', () => {
-    onRegisterPage.checkSignup()
+    onMainPage.checkUserLoggedIn()
 })
 
-Then ('API response is OK', () => {
-    onRegisterPage.checkAPIResponse()
+Then ('Register API response is OK', () => {
+    onRegisterPage.checkAPIResponseisOK()
+})
+
+Then ('Login API response is OK', () => {
+    onLoginPage.checkAPIResponseisOK()
 })
