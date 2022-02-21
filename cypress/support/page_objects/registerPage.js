@@ -18,15 +18,23 @@ export class RegisterPage {
         cy.get('#password2').type(user.password)
         cy.get('.accountNew__agbCheckbox').find('.checkbox__checkbox').click()
         cy.contains('#register-submit', 'Weiter').click()
+        
+        
+    }
 
-        cy.wait('@postRegister')
-        cy.get('@postRegister').then(xhr => {
-            expect(xhr.response.statusCode).to.equal(200)
-        })
+    checkSignup() {
+        
         cy.location('pathname').should('eq', '/')
         cy.get(".headerElement--login")
             .find('a')
             .should("have.attr", "href", "/kundenkonto");
+    }
+
+    checkAPIResponse() {
+        cy.wait('@postRegister')
+        cy.get('@postRegister').then(xhr => {
+            expect(xhr.response.statusCode).to.equal(200)
+        })
     }
 }
 
