@@ -24,6 +24,14 @@ When('user logs in', () => {
 
 })
 
+When('user logs in with {string} and {string}', (email, password) => {
+    user.email = email
+    user.password = password
+    onMainPage.goToLoginPage()
+    onLoginPage.login(user)
+
+})
+
 
 When('user signs up', () => {
 
@@ -43,10 +51,18 @@ Then('user is logged in', () => {
     onMainPage.checkUserLoggedIn()
 })
 
-Then ('Register API response is OK', () => {
-    onRegisterPage.checkAPIResponseisOK()
+Then ('Register API response is {int}', (code) => {
+    onRegisterPage.checkAPIResponse(code)
 })
 
-Then ('Login API response is OK', () => {
-    onLoginPage.checkAPIResponseisOK()
+Then ('Login API response is {int}', (code) => {
+    onLoginPage.checkAPIResponse(code)
+})
+
+Then ('email error message is {string}', (errorMessage) => {
+    onLoginPage.checkEmailErrorMessage(errorMessage)
+})
+
+Then ('password error message is {string}', (errorMessage) => {
+    onLoginPage.checkPasswordErrorMessage(errorMessage)
 })

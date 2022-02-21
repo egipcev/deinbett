@@ -22,10 +22,10 @@ export class RegisterPage {
         
     }
 
-    checkAPIResponseisOK() {
+    checkAPIResponse(code) {
         cy.wait('@postRegister')
         cy.get('@postRegister').then(xhr => {
-            expect(xhr.response.statusCode).to.equal(200)
+            expect(xhr.response.statusCode).to.equal(code)
         })
     }
 }
