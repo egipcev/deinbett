@@ -10,28 +10,36 @@ function getRandomEmail() {
     return 'test-' + Math.random().toString(36).substring(2, 16) + '@mail.com'
 }
 
-
-
-Given('user opens main page', () => {
-    onMainPage.open()
-   
-})
-
-When('user logs in', () => {
-
-    onMainPage.goToLoginPage()
-    onLoginPage.login(user)
-
+Then('user is logged in', () => {
+    onMainPage.checkUserLoggedIn()
 })
 
 When('user logs in with {string} and {string}', (email, password) => {
-    user.email = email
-    user.password = password
+    let userEmail;
+    let userPassword;
+    if (email === 'loginEmail') {
+        userEmail = Cypress.env(email)
+    } else {
+        userEmail = email
+    }
+    if (password === 'loginPassword') {
+        userPassword = Cypress.env(password)
+    } else {
+        userPassword = password
+    }
+    user = {
+        "email": userEmail,
+        "password": userPassword
+    }
     onMainPage.goToLoginPage()
     onLoginPage.login(user)
 
 })
 
+Given('user opens main page', () => {
+    onMainPage.open()
+
+})
 
 When('user signs up', () => {
 
@@ -42,27 +50,13 @@ When('user signs up', () => {
         "salutation": Cypress.env('salutation'),
         "email": getRandomEmail()
     }
+
     onMainPage.goToLoginPage()
     onLoginPage.goToRegistration()
     onRegisterPage.signup(user)
 })
 
-Then('user is logged in', () => {
-    onMainPage.checkUserLoggedIn()
-})
-
-Then ('Register API response is {int}', (code) => {
-    onRegisterPage.checkAPIResponse(code)
-})
-
-Then ('Login API response is {int}', (code) => {
-    onLoginPage.checkAPIResponse(code)
-})
-
-Then ('email error message is {string}', (errorMessage) => {
-    onLoginPage.checkEmailErrorMessage(errorMessage)
-})
-
-Then ('password error message is {string}', (errorMessage) => {
-    onLoginPage.checkPasswordErrorMessage(errorMessage)
+When('user logs in', () => {
+    onMainPage.goToLoginPage()
+    onLoginPage.login(user)
 })

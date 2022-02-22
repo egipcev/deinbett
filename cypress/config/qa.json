@@ -3,6 +3,8 @@
         "firstName": "Firstname",
         "lastName": "Lastname",
         "password": "Password_12345!#",
-        "salutation": "Herr"
+        "salutation": "Herr",
+        "loginEmail": "test@mail.com",
+        "loginPassword": "Password_12345!#"
     }
 }

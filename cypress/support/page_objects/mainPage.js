@@ -1,6 +1,6 @@
 export class MainPage {
 
-    
+
 
     open() {
         cy.visit('/')
