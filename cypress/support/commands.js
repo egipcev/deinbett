@@ -26,25 +26,23 @@
 
 Cypress.Commands.add('addFirstProductToWishList', () => {
     cy.get('[data-tile-position="1"]').find('.wishlistIcon')
-        .scrollIntoView()
         .click()
 })
 
 Cypress.Commands.add('openProductMenu', (link) => {
+    cy.get('.header__container').scrollIntoView()
     cy.get('.menu__linkHref[href="' + link + '"]')
-        .scrollIntoView()
         .click()
 })
 
 Cypress.Commands.add('openProductSubCategory', (link) => {
     cy.get('.flyoutSubCategory__link[href="' + link + '"]')
-        .scrollIntoView()
         .click()
 })
 
 Cypress.Commands.add('goToBettenPage', () => {
     cy.openProductMenu('/betten')
-    cy.openProductSubCategory('/bettgestelle')
+    cy.openProductSubCategory('/boxspringbetten')
 })
 
 Cypress.Commands.add('goToMatratzenPage', () => {
@@ -68,8 +66,8 @@ Cypress.Commands.add('goToMoebelPage', () => {
 })
 
 Cypress.Commands.add('goToWishlistPage', () => {
+    cy.get('.header__container').scrollIntoView()
     cy.get('.headerElement__link[href="/wunschliste"]')
-        .scrollIntoView()
         .click()
 })
 
