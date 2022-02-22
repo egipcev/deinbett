@@ -25,15 +25,21 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('addFirstProductToWishList', () => {
-    cy.get('[data-tile-position="1"]').find('.wishlistIcon').click()
+    cy.get('[data-tile-position="1"]').find('.wishlistIcon')
+        .scrollIntoView()
+        .click()
 })
 
 Cypress.Commands.add('openProductMenu', (link) => {
-    cy.get('.menu__linkHref[href="' + link + '"]').click()
+    cy.get('.menu__linkHref[href="' + link + '"]')
+        .scrollIntoView()
+        .click()
 })
 
 Cypress.Commands.add('openProductSubCategory', (link) => {
-    cy.get('.flyoutSubCategory__link[href="' + link + '"]').click()
+    cy.get('.flyoutSubCategory__link[href="' + link + '"]')
+        .scrollIntoView()
+        .click()
 })
 
 Cypress.Commands.add('goToBettenPage', () => {
@@ -67,8 +73,12 @@ Cypress.Commands.add('goToWishlistPage', () => {
         .click()
 })
 
-Cypress.Commands.add('checkCounter', (count) => {
-    cy.get('.headerElement__link[href="/wunschliste"] .headerElement__status').should('contain', count)
+Cypress.Commands.add('goToBasket', () => {
+    cy.contains('.button', 'Zum Warenkorb').click()
+})
+
+Cypress.Commands.add('checkCounter', (count, link) => {
+    cy.get('.headerElement__link[href="' + link + '"] .headerElement__status').should('contain', count)
 })
 
 

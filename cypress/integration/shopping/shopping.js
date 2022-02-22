@@ -1,5 +1,5 @@
-import { onLoginPage } from "../../support/page_objects/loginPage";
-import { onRegisterPage } from "../../support/page_objects/registerPage";
+
+import { onBasketPage } from "../../support/page_objects/basketPage";
 import { onWishlistPage } from "../../support/page_objects/wishlistPage";
 import { When, Then, Given } from 'cypress-cucumber-preprocessor/steps';
 /// <reference types = "cypress" />
@@ -21,7 +21,19 @@ When('user adds five items to wishlist', () => {
 })
 
 Then('{int} items are in wishlist', (count) => {
-    cy.checkCounter(count)
+    cy.checkCounter(count, '/wunschliste')
     cy.goToWishlistPage()
     onWishlistPage.checkWishEntries(count)
+})
+
+When('user adds items from wishlist to basket', () => {
+    cy.goToWishlistPage()
+    onWishlistPage.enterPLZ(12345)
+    onWishlistPage.addItemsToBasket()
+})
+
+Then('{int} items are in basket', (count) => {
+    cy.goToBasket()
+    cy.checkCounter(count, '/warenkorb')
+    onBasketPage.checkBasketEntries(count)
 })

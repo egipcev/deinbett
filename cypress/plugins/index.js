@@ -47,4 +47,3 @@ function getConfigurationByFile(file) {
     return getConfigurationByFile(file)
 
   }
-// }
