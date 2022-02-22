@@ -6,6 +6,7 @@ Feature: Shopping
     Scenario: User adds items to wishlist
         When user signs up
         And user is logged in
-        Then user adds several items to wishlist
+        And user adds five items to wishlist
+        Then 5 items are in wishlist
 
 

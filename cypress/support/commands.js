@@ -58,7 +58,17 @@ Cypress.Commands.add('goToLattenrostePage', () => {
 
 Cypress.Commands.add('goToMoebelPage', () => {
     cy.openProductMenu('/moebel')
-    cy.openProductSubCategory('/schwebetuerenschraenke')
+    cy.openProductSubCategory('/drehtuerenschraenke')
+})
+
+Cypress.Commands.add('goToWishlistPage', () => {
+    cy.get('.headerElement__link[href="/wunschliste"]')
+        .scrollIntoView()
+        .click()
+})
+
+Cypress.Commands.add('checkCounter', (count) => {
+    cy.get('.headerElement__link[href="/wunschliste"] .headerElement__status').should('contain', count)
 })
 
 
